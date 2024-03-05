@@ -151,7 +151,7 @@ public class OrderGenerator {
                             continue;
                         }
                         //mencetak hasil method generateOrderID
-                        System.out.print("Order ID " + generateOrderID(namaRestoran,
+                        System.out.println("Order ID " + generateOrderID(namaRestoran,
                                 String.join("", tanggalOrder), noTelepon) + " diterima!");
                         generatingOrder = false;
                     }break;
@@ -178,6 +178,7 @@ public class OrderGenerator {
                             continue;
                         }
                         //Mencetak hasil generateBill
+                        System.out.println();
                         System.out.print(generateBill(orderID,lokasi));
                         generatingBill = false;
                     }break;
@@ -189,7 +190,7 @@ public class OrderGenerator {
                 default://menangkap input pilihan menu yang tidak valid
                     System.out.println("Pilihan menu tidak valid!");
             }
-            System.out.println("\n--------------------------------");
+            System.out.println("--------------------------------");
             System.out.println("Pilih menu:");
             System.out.println("1. Generate Order ID");
             System.out.println("2. Generate Bill");
