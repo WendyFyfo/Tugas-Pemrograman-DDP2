@@ -69,9 +69,8 @@ public class OrderGenerator {
      */
     public static String generateBill(String OrderID, String lokasi){
         // mendapatkan tanggal dan biaya ongkir lalu mengembalikan pesan Bill
-        return String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: %s\n",
-                OrderID,
-                OrderID.substring(4,6) + "/" + OrderID.substring(6,8) + "/" + OrderID.substring(8,12),
+        return String.format("Bill:\nOrder ID: %s\nTanggal Pemesanan: %s\nLokasi Pengiriman: %s\nBiaya Ongkos Kirim: Rp %s\n",
+                OrderID, OrderID.substring(4,6) + "/" + OrderID.substring(6,8) + "/" + OrderID.substring(8,12),
                 lokasi, biayaOngkir["PUTSB".indexOf(lokasi)]);
     }
 
