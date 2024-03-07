@@ -1,4 +1,6 @@
 # Tugas Pemrograman DDP2 2023/2024
+Muhammad Wendy Fyfo Anggara - FJR
+2306223906
 
 CSGE601021 Dasar-Dasar Pemrograman 2 @ Fakultas Ilmu Komputer Universitas Indonesia,
 Semester Genap 2023/2024
