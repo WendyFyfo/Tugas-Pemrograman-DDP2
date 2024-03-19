@@ -107,7 +107,6 @@ public class OrderGenerator {
     }
 
     public static void main(String[] args) {
-        // TODO: Implementasikan program sesuai ketentuan yang diberikan
         showMenu();
         int aksi = 0;
         boolean generatingOrder ;

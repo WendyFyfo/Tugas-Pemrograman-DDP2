@@ -1,10 +1,25 @@
 package assignments.assignment2;
 
 public class Menu {
-     // TODO: tambahkan attributes yang diperlukan untuk class ini
+    private String namaMakanan;
+    private double harga;
+
     public Menu(String namaMakanan, double harga){
-        // TODO: buat constructor untuk class ini
+        this.namaMakanan = namaMakanan;
+        this.harga = harga;
     }
 
-    // TODO: tambahkan methods yang diperlukan untuk class ini
+    //GETTER method
+    public String getNamaMakanan(){
+        return this.namaMakanan;
+    }
+
+    public double getHarga(){
+        return this.harga;
+    }
+
+    //override Object toString() method
+    public String toString(){
+        return this.namaMakanan + " " + (int) this.harga;
+    }
 }
