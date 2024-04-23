@@ -168,7 +168,7 @@ public class MainMenu {
                 }
             }
     
-            if (orderedMenu.size() == 0){
+            if (orderedMenu.size() != jumlahPesanan){ //fix 2nd operand
                 System.out.println("Mohon memesan menu yang tersedia di Restoran!\n");
                 continue;
             }
@@ -216,7 +216,7 @@ public class MainMenu {
                     System.out.println("Biaya Ongkos Kirim: Rp" + order.getBiayaOngkosKirim() );
 
                     int totalBiaya = 0;
-                    for(Menu menu: order.getRestaurant().getMenu()){
+                    for(Menu menu: order.getItems()){ //fix iterated array
                         totalBiaya += (int) menu.getHarga();
                     }
                     totalBiaya += order.getBiayaOngkosKirim();
@@ -390,7 +390,7 @@ public class MainMenu {
                             break;
                         }
                     }else{
-                        if(j-k == 0){
+                        if(j-k == 0){ //check apakah menu1 dicompare dengan menuList[0]
                             menuList.add(0, tempMenuList.get(j));
                             break;
                         }else { 
