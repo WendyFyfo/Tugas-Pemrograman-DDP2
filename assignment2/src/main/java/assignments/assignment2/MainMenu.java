@@ -1,6 +1,10 @@
 package assignments.assignment2;
 
 import assignments.assignment1.OrderGenerator;
+import assignments.assignmentmodel.User;
+import assignments.assignmentmodel.Order;
+import assignments.assignmentmodel.Restaurant;
+import assignments.assignmentmodel.Menu;
 
 import java.util.ArrayList;
 import java.util.Scanner;

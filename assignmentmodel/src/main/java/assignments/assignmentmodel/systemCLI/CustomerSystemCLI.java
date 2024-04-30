@@ -1,4 +1,4 @@
-package assignments.assignment3.systemCLI;
+package assignments.assignmentmodel.systemCLI;
 
 import java.util.Scanner;
 

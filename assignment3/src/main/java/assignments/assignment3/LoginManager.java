@@ -1,8 +1,8 @@
 package assignments.assignment3;
 
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
-import assignments.assignment3.systemCLI.UserSystemCLI;
+import assignments.assignmentmodel.systemCLI.AdminSystemCLI;
+import assignments.assignmentmodel.systemCLI.CustomerSystemCLI;
+import assignments.assignmentmodel.systemCLI.UserSystemCLI;
 
 public class LoginManager {
     private final AdminSystemCLI adminSystem;

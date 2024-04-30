@@ -3,13 +3,12 @@ package assignments.assignment3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import assignments.assignment2.Restaurant;
-import assignments.assignment2.User;
-import assignments.assignment3.LoginManager
-import assignments.assignment3.payment.CreditCardPayment;
-import assignments.assignment3.payment.DebitPayment;
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
+import assignments.assignmentmodel.Restaurant;
+import assignments.assignmentmodel.User;
+import assignments.assignmentmodel.payment.CreditCardPayment;
+import assignments.assignmentmodel.payment.DebitPayment;
+import assignments.assignmentmodel.systemCLI.AdminSystemCLI;
+import assignments.assignmentmodel.systemCLI.CustomerSystemCLI;
 
 public class MainMenu {
     private final Scanner input;

@@ -1,4 +1,4 @@
-package assignments.assignment2;
+package assignments.assignmentmodel;
 
 public class Menu {
     private String namaMakanan;

@@ -1,12 +1,13 @@
-package assignments.assignment3.systemCLI;
+package assignments.assignmentmodel.systemCLI;
 
 import java.util.Scanner;
 
 //TODO: Extends Abstract yang diberikan
-public class AdminSystemCLI {
+public class AdminSystemCLI extends UserSystemCLI{
 
     //TODO: Tambahkan modifier dan buatlah metode ini mengoverride dari Abstract class
-    boolean handleMenu(int command){
+    @Override
+    public boolean handleMenu(int command){
         switch(command){
             case 1 -> handleTambahRestoran();
             case 2 -> handleHapusRestoran();
@@ -17,7 +18,8 @@ public class AdminSystemCLI {
     }
 
     //TODO: Tambahkan modifier dan buatlah metode ini mengoverride dari Abstract class
-    void displayMenu() {
+    @Override
+    public void displayMenu() {
         System.out.println("\n--------------------------------------------");
         System.out.println("Pilih menu:");
         System.out.println("1. Tambah Restoran");
@@ -29,6 +31,7 @@ public class AdminSystemCLI {
 
     protected void handleTambahRestoran(){
         // TODO: Implementasi method untuk handle ketika admin ingin tambah restoran
+
     }
 
     protected void handleHapusRestoran(){
