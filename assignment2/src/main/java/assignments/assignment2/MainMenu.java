@@ -97,50 +97,40 @@ public class MainMenu {
 
     //method untuk start menu membuat pesanan
     public static void handleBuatPesanan(User user){
-        System.out.println("----------Buat Pesanan----------");
+        System.out.print("----------Buat Pesanan----------");
         boolean generatingOrder = true;
         while(generatingOrder) {
             //validasi input user
-            System.out.print("Nama Restoran: ");
-            String namaRestoran = input.nextLine().trim();
-            //validasi panjang input restoran
-            if (namaRestoran.length() < 4) {
-                System.out.println("Nama Restoran tidak valid!\n");
-                continue;
-            }
-
-            
-            //cek keberadaan restoran di sistem
+            String namaRestoran = "";
+            String tanggalOrder = "";
             Restaurant restoObject = null;
-            for(Restaurant resto: restoList){
-                if(namaRestoran.equalsIgnoreCase(resto.getNama())){
-                    restoObject = resto;
-                    break;
+            do{
+                namaRestoran = OrderGenerator.inputRestaurantName("");
+                if(namaRestoran.isEmpty()){continue;}
+
+                //cek keberadaan restoran di sistem
+                for(Restaurant resto: restoList){
+                    if(namaRestoran.equalsIgnoreCase(resto.getNama())){
+                        restoObject = resto;
+                        break;
+                    }
                 }
-            }
-            if (restoObject == null){
-                System.out.println("Restoran tidak terdaftar pada sistem.\n");
-                continue;
-            }
+                if (restoObject == null){
+                    System.out.println("Restoran tidak terdaftar pada sistem.\n");
+                    namaRestoran = "";
+                    continue;
+                }
 
-            //input tanggal pemesanan
-            System.out.print("Tanggal pemesanan: ");
-            String tanggalOrderInput = input.nextLine();
-            //validasi input tanggal pemesanan
-            if (tanggalOrderInput.replaceAll("[^/]+", "").length() != 2) {
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
-                continue;
-            } else if (!tanggalOrderInput.replaceAll("[0-9/]+", "").isEmpty()) {
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
-                continue;
-            }
+                tanggalOrder = OrderGenerator.inputDate("");
+                if(tanggalOrder.isEmpty()){namaRestoran = "";}
+            }while(namaRestoran.isEmpty());
+            
+            
 
-            String[] tanggalOrder = tanggalOrderInput.replaceAll("[^0-9/]+", "").split("/");
-            if (tanggalOrder[0].length() != 2 || tanggalOrder[1].length() != 2 || tanggalOrder[2].length() != 4) {
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!\n");
-                continue;
-            }
 
+            //membuat orderID dan mencetak pesan proses pembuatan pesanan sukses
+            String orderID = OrderGenerator.generateOrderID(namaRestoran, tanggalOrder, user.getNomorTelepon());
+            
             //input jumlah pesanan dan menu yang dipesan
             System.out.print("Jumlah Pesanan: ");
             int jumlahPesanan = input.nextInt();
@@ -158,26 +148,24 @@ public class MainMenu {
             ArrayList<Menu> orderedMenu = new ArrayList<>();
             for(Menu menu: restoObject.getMenu()){
                 String namaMakanan = menu.getNamaMakanan();
-                if (orderList.size() > 0 ){
+                if (orderList.size() > 0 ){ //stop if orderlist is empty/ completely moved to orderedMenu
                         if (namaMakanan.equals(orderList.get(0))){
                             orderList.remove(0);
                             orderedMenu.add(menu);
                             continue;
                         }
-                    
+                }else{
+                    break;
                 }
             }
     
-            if (orderedMenu.size() != jumlahPesanan){ //fix 2nd operand
+            if (orderedMenu.size() != jumlahPesanan){
                 System.out.println("Mohon memesan menu yang tersedia di Restoran!\n");
                 continue;
             }
 
-            //membuat orderID dan mencetak pesan proses pembuatan pesanan sukses
-            String orderID = OrderGenerator.generateOrderID(namaRestoran.toUpperCase(),
-                    String.join("", tanggalOrder), user.getNomorTelepon());
-            user.setOrder(new Order(orderID, tanggalOrderInput, biayaOngkir["PUTSB".indexOf(user.getLokasi())], restoObject, orderedMenu ));
-
+            //Make new order for user instance;
+            user.setOrder(new Order(orderID, tanggalOrder, biayaOngkir["PUTSB".indexOf(user.getLokasi())], restoObject, orderedMenu ));
             //mencetak pesan pesanan diterima
             System.out.println("pesanan dengan ID " + orderID + " diterima!");
             generatingOrder = false;
@@ -213,7 +201,7 @@ public class MainMenu {
                     for(Menu menu: order.getItems()){
                         System.out.println("- " + menu.toString());
                     }
-                    System.out.println("Biaya Ongkos Kirim: Rp" + order.getBiayaOngkosKirim() );
+                    System.out.println("Biaya Ongkos Kirim: Rp " + order.getBiayaOngkosKirim() );
 
                     int totalBiaya = 0;
                     for(Menu menu: order.getItems()){ //fix iterated array
@@ -261,7 +249,6 @@ public class MainMenu {
             for (Restaurant resto: restoList){
                 if (resto.getNama().equalsIgnoreCase(namaRestoran)){
                     ArrayList<Menu> menu= resto.getMenu();
-                    System.out.println(menu.toString());
                     for(int i = 0;  i< menu.size(); i++){
                         System.out.println((i+1) +". " + menu.get(i).toString());
                     }
@@ -342,15 +329,22 @@ public class MainMenu {
             int jumlahMakanan = input.nextInt();
             input.nextLine();
             ArrayList<String[]> tempMenuList = new ArrayList<>();
-            String menu = input.nextLine();
-            int splitPosition = menu.lastIndexOf(" ");
-            tempMenuList.add(new String[]{menu.substring(0,splitPosition), menu.substring(splitPosition+1)});
-            int i = 1;
+            String menu = "";
+            int splitPosition = 0;
+            int i = 0;
             while (i < jumlahMakanan){
                 menu = input.nextLine().trim();
                 splitPosition = menu.lastIndexOf(" ");
+                if(splitPosition == -1){
+                    System.out.println("Harus menulis harga setelah nama menu!\n");
+                    tempMenuList.clear(); //clear arraylist bila input harga invalid
+                    break;
+                }
                 tempMenuList.add(new String[]{menu.substring(0,splitPosition), menu.substring(splitPosition+1)});
                 i++;
+            }
+            if (tempMenuList.isEmpty()){
+                continue;
             }
 
             for(String[] item: tempMenuList){
