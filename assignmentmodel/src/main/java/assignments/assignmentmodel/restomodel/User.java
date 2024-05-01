@@ -1,7 +1,7 @@
-package assignments.assignmentmodel;
+package assignments.assignmentmodel.restomodel;
 
 import java.util.ArrayList;
-import assignments.assignmentmodel.payment.CreditCardPayment;
+
 import assignments.assignmentmodel.payment.DebitPayment;
 import assignments.assignmentmodel.payment.DepeFoodPaymentSystem;
 
@@ -12,7 +12,6 @@ public class User {
     private String lokasi;
     private String role;
     private ArrayList<Order> orderHistory = new ArrayList<>();
-    private String deliveryStatus = "not finished";
     private DepeFoodPaymentSystem payment;
     private long saldo;
 
@@ -22,6 +21,8 @@ public class User {
         this.email = email;
         this.lokasi = lokasi;
         this.role = role;
+        this.payment = new DebitPayment();
+        this.saldo = 0;
     }
 
     public User(String nama, String nomorTelepon, String email, String lokasi, String role, DepeFoodPaymentSystem payment, long saldo){
@@ -40,10 +41,6 @@ public class User {
         this.orderHistory.add(order);
     }
 
-    public void setDeliveryStatus(String newStatus){
-        this.deliveryStatus = newStatus;
-    }
-
     //GETTER method
     public String getNama(){
         return this.nama;
@@ -58,6 +55,18 @@ public class User {
 
     public String getRole(){
         return this.role;
+    }
+
+    public DepeFoodPaymentSystem getPayment(){
+        return this.payment;
+    }
+
+    public long getSaldo(){
+        return this.saldo;
+    }
+
+    public void payOrder(long amount) {
+        this.saldo -= amount;
     }
 
     public ArrayList<Order> getOrderHistory() {

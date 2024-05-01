@@ -1,4 +1,4 @@
-package assignments.assignmentmodel;
+package assignments.assignmentmodel.restomodel;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,8 @@ public class Order {
     private int biayaOngkosKirim;
     private Restaurant restaurant;
     private ArrayList<Menu> items;
-    private String orderStatus = "Not Finished";
+    private String orderStatus;
+    private int totalBiaya;
 
     public Order(String orderId, String tanggal, int ongkir, Restaurant resto, ArrayList<Menu> items){
         this.orderId = orderId;
@@ -16,6 +17,8 @@ public class Order {
         this.biayaOngkosKirim = ongkir;
         this.restaurant = resto;
         this.items = items;
+        this.orderStatus = "Not Finished";
+        countTotalBiaya();
     }
     
     //SETTER method
@@ -46,5 +49,17 @@ public class Order {
 
     public String getOrderStatus(){
         return this.orderStatus;
+    }
+
+    public int getTotalBiaya(){
+        return this.totalBiaya;
+    }
+
+    //method untuk menghitung total biaya
+    public void countTotalBiaya(){
+        for(Menu menu: this.getItems()){ //fix iterated array
+            this.totalBiaya += (int) menu.getHarga();
+        }
+        this.totalBiaya += this.getBiayaOngkosKirim();
     }
 }

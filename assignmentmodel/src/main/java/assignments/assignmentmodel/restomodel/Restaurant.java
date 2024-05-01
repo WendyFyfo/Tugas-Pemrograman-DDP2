@@ -1,4 +1,6 @@
-package assignments.assignmentmodel;
+package assignments.assignmentmodel.restomodel;
+
+import assignments.assignmentmodel.restomodel.Menu;
 
 import java.util.ArrayList;
 

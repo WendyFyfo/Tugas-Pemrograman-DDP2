@@ -1,4 +1,4 @@
-package assignments.assignmentmodel;
+package assignments.assignmentmodel.restomodel;
 
 public class Menu {
     private String namaMakanan;

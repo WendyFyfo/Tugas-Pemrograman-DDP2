@@ -1,10 +1,7 @@
 package assignments.assignment2;
 
 import assignments.assignment1.OrderGenerator;
-import assignments.assignmentmodel.User;
-import assignments.assignmentmodel.Order;
-import assignments.assignmentmodel.Restaurant;
-import assignments.assignmentmodel.Menu;
+import assignments.assignmentmodel.restomodel.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,7 +43,7 @@ public class MainMenu {
 
                 boolean isLoggedIn = true;
                 //Masuk ke menu berdasarkan role user
-                if(userLoggedIn.getRole() == "Customer"){
+                if(userLoggedIn.getRole().equals("Customer")){
                     //start menu customer
                     while (isLoggedIn){
                         menuCustomer();
@@ -105,7 +102,7 @@ public class MainMenu {
         boolean generatingOrder = true;
         while(generatingOrder) {
             //validasi input user
-            String namaRestoran = "";
+            String namaRestoran;
             String tanggalOrder = "";
             Restaurant restoObject = null;
             do{
@@ -142,7 +139,7 @@ public class MainMenu {
 
             System.out.println("Order: ");
             int i = 0;
-            ArrayList<String> orderList = new ArrayList<String>(jumlahPesanan);
+            ArrayList<String> orderList = new ArrayList<>(jumlahPesanan);
             while (i < jumlahPesanan) {
                 orderList.add(input.nextLine());
                 i++;
@@ -153,10 +150,9 @@ public class MainMenu {
             for(Menu menu: restoObject.getMenu()){
                 String namaMakanan = menu.getNamaMakanan();
                 if (orderList.size() > 0 ){ //stop if orderlist is empty/ completely moved to orderedMenu
-                        if (namaMakanan.equals(orderList.get(0))){
-                            orderList.remove(0);
+                        if (namaMakanan.equals(orderList.getFirst())){
+                            orderList.removeFirst();
                             orderedMenu.add(menu);
-                            continue;
                         }
                 }else{
                     break;
@@ -179,7 +175,7 @@ public class MainMenu {
     //method untuk start menu cetakBill
     public static void handleCetakBill(User user){
         //cek apakah user sudah pernah memesan
-        if(user.getOrderHistory().size() == 0){
+        if(user.getOrderHistory().isEmpty()){
             System.out.println("\nOrder Kosong:\nCustomer "+ user.getNama() + " belum pernah membuat pesanan.\n");
             return;
         }
@@ -219,9 +215,9 @@ public class MainMenu {
             }
             if (cetakBill == false){
                 System.out.println();
-                break;
+            }else{
+                System.out.println("Order ID tidak dapat ditemukan.\n");
             }
-            System.out.println("Order ID tidak dapat ditemukan.\n");
         }
     }
 
@@ -262,9 +258,9 @@ public class MainMenu {
             }
             if (lihatMenu == false){
                 System.out.println();
-                break;
+            }else{
+                System.out.println("Restoran tidak terdaftar pada sistem.\n");
             }
-            System.out.println("Restoran tidak terdaftar pada sistem.\n");
         }
     }
 
@@ -293,8 +289,6 @@ public class MainMenu {
             }
             if(updateOrderStatus){
                 System.out.println("Restoran tidak terdaftar pada sistem.\n");
-            }else{
-                break;
             }
         }
     }
@@ -305,13 +299,7 @@ public class MainMenu {
         boolean tambahRestoran  = true;
         while(tambahRestoran){
             //input nama restoran
-            System.out.print("Nama: ");
-            String namaRestoran = input.nextLine().trim();
-            //validasi panjang input nama restoran
-            if (namaRestoran.length() < 4) {
-                System.out.println("Nama Restoran tidak valid!\n");
-                continue;
-            }
+            String namaRestoran = OrderGenerator.inputRestaurantName("");
 
             //cek apakah nama restoran sudah pernah terdaftar
             if(restoList != null){
@@ -333,8 +321,8 @@ public class MainMenu {
             int jumlahMakanan = input.nextInt();
             input.nextLine();
             ArrayList<String[]> tempMenuList = new ArrayList<>();
-            String menu = "";
-            int splitPosition = 0;
+            String menu;
+            int splitPosition;
             int i = 0;
             while (i < jumlahMakanan){
                 menu = input.nextLine().trim();
@@ -364,7 +352,7 @@ public class MainMenu {
 
             //Sort menu pada restoran berdasarkan harga dan nama
             ArrayList<String[]> menuList = new ArrayList<>();
-            menuList.add(tempMenuList.get(0));
+            menuList.add(tempMenuList.getFirst());
             for(int j=1 ; j < jumlahMakanan; j++){
                 double hargaMenu2 = Double.parseDouble(tempMenuList.get(j)[1]);
                 for(int k=1; k < menuList.size()+ 1;k++){
@@ -379,7 +367,6 @@ public class MainMenu {
                                 menuList.add(j+1-k, tempMenuList.get(j));
                                 break;
                             }
-                            continue;
                         }else if (compareNamaMenu == 0){
                             menuList.add(j-k, tempMenuList.get(j));
                             break;
@@ -389,12 +376,9 @@ public class MainMenu {
                         }
                     }else{
                         if(j-k == 0){ //check apakah menu1 dicompare dengan menuList[0]
-                            menuList.add(0, tempMenuList.get(j));
+                            menuList.addFirst(tempMenuList.get(j));
                             break;
-                        }else { 
-                            continue;
                         }
-                        
                     }
                 }
             }
@@ -402,7 +386,7 @@ public class MainMenu {
             //memasukkann Resto dan daftar menunya ke sistem
             restoList.add(new Restaurant(namaRestoran));
             for(String[] item: menuList) {
-                restoList.get(restoList.size()-1).addMenu(new Menu(item[0],Double.parseDouble(item[1])));
+                restoList.getLast().addMenu(new Menu(item[0],Double.parseDouble(item[1])));
             }
             System.out.println("Restaurant " + namaRestoran + " berhasil terdaftar.");
             tambahRestoran = false;
@@ -437,7 +421,7 @@ public class MainMenu {
     }
 
     public static void initUser(){
-       userList = new ArrayList<User>();
+       userList = new ArrayList<>();
        userList.add(new User("Thomas N", "9928765403", "thomas.n@gmail.com", "P", "Customer"));
        userList.add(new User("Sekar Andita", "089877658190", "dita.sekar@gmail.com", "B", "Customer"));
        userList.add(new User("Sofita Yasusa", "084789607222", "sofita.susa@gmail.com", "T", "Customer"));

@@ -3,22 +3,15 @@ package assignments.assignment3;
 import assignments.assignmentmodel.systemCLI.AdminSystemCLI;
 import assignments.assignmentmodel.systemCLI.CustomerSystemCLI;
 import assignments.assignmentmodel.systemCLI.UserSystemCLI;
+import assignments.assignmentmodel.restomodel.User;
 
 public class LoginManager {
-    private final AdminSystemCLI adminSystem;
-    private final CustomerSystemCLI customerSystem;
-
-    public LoginManager(AdminSystemCLI adminSystem, CustomerSystemCLI customerSystem) {
-        this.adminSystem = adminSystem;
-        this.customerSystem = customerSystem;
-    }
-
-    //TODO: Solve the error :) (It's actually easy if you have done the other TODOs)
-    public UserSystemCLI getSystem(String role){
-        if(role == "Customer"){
-            return adminSystem;
+    //cek role user dan menjalankan menu program sesuai role
+    public UserSystemCLI getSystem(User userLoggedIn){
+        if(userLoggedIn.getRole().equals("Customer")){
+            return new CustomerSystemCLI(userLoggedIn);
         }else{
-            return customerSystem;
+            return new AdminSystemCLI();
         }
     }
 }

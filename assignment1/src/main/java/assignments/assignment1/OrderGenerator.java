@@ -49,13 +49,13 @@ public class OrderGenerator {
             if(noTelepon.isEmpty()){
                 namaRestoran = "";
                 tanggalOrder = "";
-                continue;
             }
         }while(namaRestoran.isEmpty() || tanggalOrder.isEmpty() || noTelepon.isEmpty());
         
         StringBuilder orderID = new StringBuilder(); //Stringbuilder untuk menyimpan OrderID
-        orderID.append(namaRestoran.substring(0,4)); //mengambil 4 karakter alphanumeric nama restoran untuk OrderID
-        orderID.append(tanggalOrder); //mengisi karakter 4-11 Order ID dengan tanggal order
+        orderID.append(namaRestoran.substring(0,4).toUpperCase()); //mengambil 4 karakter alphanumeric nama restoran untuk OrderID
+        String[] tanggalOrderArr = tanggalOrder.split("/");
+        orderID.append(String.join("",tanggalOrderArr)); //mengisi karakter 4-11 Order ID dengan tanggal order
 
         //Menghitung karakter 12-13 Order ID dari no telepon
         int noTeleponSum = 0;
@@ -104,17 +104,17 @@ public class OrderGenerator {
     public static String inputRestaurantName(String name){
         String namaRestoran;
         if (name.isEmpty()){
-            System.out.print("\nNama Restoran: ");
-            namaRestoran = input.nextLine().trim().toUpperCase().replaceAll("[^A-Z0-9]+","");
-            if (namaRestoran.length() < 4){
-                System.out.println("Nama Restoran tidak valid!");
+            System.out.print("Nama Restoran: ");
+            namaRestoran = input.nextLine();
+            String namaRestoranFormatted = namaRestoran.trim().toUpperCase().replaceAll("[^A-Z0-9]+","");
+            if (namaRestoranFormatted.length() < 4){
+                System.out.println("Nama Restoran tidak valid!\n");
                 return "";
             }
-            namaRestoran = namaRestoran.substring(0, 4).toUpperCase();      
         }else{
-            namaRestoran = name.toUpperCase();
+            namaRestoran = name;
         }
-        return namaRestoran.substring(0, 4);   
+        return namaRestoran;
     }
     
     //method untuk meminta dan validasi input tanggal order
@@ -125,22 +125,22 @@ public class OrderGenerator {
             System.out.print("Tanggal pemesanan: ");
             tanggalOrderInput = input.nextLine();
             if (tanggalOrderInput.replaceAll("[^/]+", "").length() != 2){
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!");
+                System.out.println("Masukkan tanggal sesuai format DD/MM/YYYY!\n");
                 return "";
             }else if (!tanggalOrderInput.replaceAll("[0-9/]+", "").isEmpty()){
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!");
+                System.out.println("Masukkan tanggal sesuai format DD/MM/YYYY!\n");
                 return "";
             }
 
             tanggalOrder = tanggalOrderInput.replaceAll("[^0-9/]+","").split("/");
             if (tanggalOrder[0].length() != 2 || tanggalOrder[1].length() != 2 || tanggalOrder[2].length() != 4){
-                System.out.println("Tanggal Pemesanan dalam format DD/MM/YYYY!");
+                System.out.println("Masukkan tanggal sesuai format DD/MM/YYYY!\n");
                 return "";
             }
         }else{
-            tanggalOrder = date.replaceAll("[^0-9/]+","").split("/");
+            tanggalOrderInput = date;
         }
-        return String.join("", tanggalOrder);
+        return tanggalOrderInput;
     }
 
     //method untuk meminta dan validasi input nomor telepon
