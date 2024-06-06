@@ -1,23 +1,23 @@
 package assignments.assignment3;
 
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
-import assignments.assignment3.systemCLI.UserSystemCLI;
+import assignments.assignmentmodel.systemCLI.AdminSystemCLI;
+import assignments.assignmentmodel.systemCLI.CustomerSystemCLI;
+import assignments.assignmentmodel.systemCLI.UserSystemCLI;
+import assignments.assignmentmodel.restomodel.User;
 
 public class LoginManager {
-    private final AdminSystemCLI adminSystem;
-    private final CustomerSystemCLI customerSystem;
+    private final UserSystemCLI userSystem;
 
-    public LoginManager(AdminSystemCLI adminSystem, CustomerSystemCLI customerSystem) {
-        this.adminSystem = adminSystem;
-        this.customerSystem = customerSystem;
+    public LoginManager(User userLoggedin) {
+        this.userSystem = getSystem(userLoggedin);
     }
 
-    public UserSystemCLI getSystem(String role) {
-        if (role.equals("Customer")) {
-            return customerSystem;
+    //cek role user dan menjalankan menu program sesuai role
+    public UserSystemCLI getSystem(User userLoggedIn) {
+        if (userLoggedIn.getRole().equals("Customer")) {
+            return new CustomerSystemCLI(userLoggedIn);
+        } else {
+            return new AdminSystemCLI();
         }
-
-        return adminSystem;
     }
 }

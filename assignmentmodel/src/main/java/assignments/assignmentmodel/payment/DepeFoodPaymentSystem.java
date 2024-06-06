@@ -1,4 +1,4 @@
-package assignments.assignment3.payment;
+package assignments.assignmentmodel.payment;
 
 public interface DepeFoodPaymentSystem {
 

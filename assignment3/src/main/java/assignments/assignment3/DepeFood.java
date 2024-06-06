@@ -9,12 +9,12 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import assignments.assignment1.OrderGenerator;
-import assignments.assignment3.payment.CreditCardPayment;
-import assignments.assignment3.payment.DebitPayment;
-import assignments.assignment3.payment.DepeFoodPaymentSystem;
-import assignments.assignment3.systemCLI.AdminSystemCLI;
-import assignments.assignment3.systemCLI.CustomerSystemCLI;
-import assignments.assignment3.systemCLI.UserSystemCLI;
+import assignments.assignmentmodel.payment.CreditCardPayment;
+import assignments.assignmentmodel.payment.DebitPayment;
+import assignments.assignmentmodel.payment.DepeFoodPaymentSystem;
+import assignments.assignmentmodel.systemCLI.AdminSystemCLI;
+import assignments.assignmentmodel.systemCLI.CustomerSystemCLI;
+import assignments.assignmentmodel.systemCLI.UserSystemCLI;
 
 public class DepeFood {
     private static ArrayList<User> userList;

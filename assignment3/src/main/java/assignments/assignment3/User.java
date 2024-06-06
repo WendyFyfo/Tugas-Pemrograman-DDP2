@@ -3,7 +3,7 @@ package assignments.assignment3;
 import java.util.ArrayList;
 import java.util.List;
 
-import assignments.assignment3.payment.DepeFoodPaymentSystem;
+import assignments.assignmentmodel.payment.DepeFoodPaymentSystem;
 
 public class User {
 
