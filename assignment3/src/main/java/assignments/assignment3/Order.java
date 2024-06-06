@@ -1,5 +1,8 @@
 package assignments.assignment3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 
     private String orderId;
@@ -7,9 +10,9 @@ public class Order {
     private int ongkir;
     private Restaurant restaurant;
     private boolean orderFinished;
-    private Menu[] items;
+    private List<Menu> items;
 
-    public Order(String orderId, String tanggal, int ongkir, Restaurant resto, Menu[] items) {
+    public Order(String orderId, String tanggal, int ongkir, Restaurant resto, List<Menu> items) {
         this.orderId = orderId;
         this.tanggal = tanggal;
         this.ongkir = ongkir;
@@ -42,23 +45,22 @@ public class Order {
         return ongkir;
     }
 
-    public Menu[] getItems() {
+    public List<Menu> getItems() {
         return items;
     }
 
-    public Menu[] getSortedMenu() {
-        Menu[] menuArr = new Menu[getItems().length];
-        for (int i = 0; i < getItems().length; i++) {
-            menuArr[i] = getItems()[i];
+    public List<Menu> getSortedMenu() {
+        List<Menu> menuArr = new ArrayList<>(getItems().size());
+        for (int i = 0; i < getItems().size(); i++) {
+            menuArr.add(i,getItems().get(i));
         }
-        int n = menuArr.length;
+        int n = menuArr.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (menuArr[j].getHarga() > menuArr[j + 1].getHarga()) {
-
-                    Menu temp = menuArr[j];
-                    menuArr[j] = menuArr[j + 1];
-                    menuArr[j + 1] = temp;
+                if (menuArr.get(j).getHarga() > menuArr.get(j+1).getHarga()) {
+                    Menu temp = menuArr.get(j);
+                    menuArr.add(j,menuArr.get(j+1));
+                    menuArr.add(j+1,temp);
                 }
             }
         }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="500.0" style="-fx-background-image: url('/Image/loginFormBG.png');" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignments.assignment4.page.AdminMenu">
+    <children>
+        <Label alignment="CENTER_RIGHT" layoutX="300.0" layoutY="24.0" maxHeight="14.0" maxWidth="150.0" prefHeight="14.0" prefWidth="150.0" text="Admin Name">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <ScrollPane hbarPolicy="NEVER" layoutX="55.0" layoutY="144.0" prefHeight="486.0" prefWidth="389.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffdbaa; -fx-border-width: 3;">
+         <content>
+            <GridPane hgap="3.0" prefHeight="486.0" prefWidth="387.0" style="-fx-background-color: #fbbb7a; -fx-border-color: #ffdbaa; -fx-border-width: 5;" vgap="3.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="157.33331298828125" minHeight="0.0" prefHeight="23.000010172526043" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="385.99999737739563" minHeight="10.0" prefHeight="25.666678110758465" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="439.6666552225749" minHeight="10.0" prefHeight="433.6666552225749" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" prefHeight="24.0" prefWidth="193.0" style="-fx-background-color: #ffffff;" text="Menu">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="24.0" prefWidth="193.0" style="-fx-background-color: #ffffff;" text="Price" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="2.0" right="2.0" top="2.0" />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </GridPane>
+         </content>
+        </ScrollPane>
+        <Button layoutX="23.0" layoutY="21.0" mnemonicParsing="false" text="Go back">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="56.0" prefHeight="88.0" prefWidth="389.0" text="012345678901234567890 asfafsafasf asdasdsadasdadssadadasdasdasdsadsadasd" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Century Gothic Bold" size="33.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>

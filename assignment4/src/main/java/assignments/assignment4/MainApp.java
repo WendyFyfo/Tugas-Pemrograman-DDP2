@@ -23,6 +23,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         window = primaryStage;
         window.setTitle("DepeFood Ordering System");
+        window.setResizable(false);
         DepeFood.initUser(); // Initialize users
 
         // Initialize all scenes
@@ -42,12 +43,14 @@ public class MainApp extends Application {
 
     // Method to set a scene
     public void setScene(Scene scene) {
+        System.out.println("setSceneCalled");
         window.setScene(scene);
         currentScene = scene;
     }
 
     // Method to get a scene by name
     public Scene getScene(String sceneName) {
+        System.out.println("Get scene called");
         return allScenes.get(sceneName);
     }
 

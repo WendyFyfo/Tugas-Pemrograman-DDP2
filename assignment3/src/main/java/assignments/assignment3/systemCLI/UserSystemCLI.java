@@ -76,12 +76,12 @@ public abstract class UserSystemCLI {
                 pesanan -> restaurant.getMenu().stream().anyMatch(menu -> menu.getNamaMakanan().equals(pesanan)));
     }
 
-    protected Menu[] getMenuRequest(Restaurant restaurant, List<String> listMenuPesananRequest) {
-        Menu[] menu = new Menu[listMenuPesananRequest.size()];
-        for (int i = 0; i < menu.length; i++) {
+    protected List<Menu> getMenuRequest(Restaurant restaurant, List<String> listMenuPesananRequest) {
+        List<Menu> menu = new ArrayList<>(listMenuPesananRequest.size());
+        for (int i = 0; i < menu.size(); i++) {
             for (Menu existMenu : restaurant.getMenu()) {
                 if (existMenu.getNamaMakanan().equals(listMenuPesananRequest.get(i))) {
-                    menu[i] = existMenu;
+                    menu.add(existMenu);
                 }
             }
         }
